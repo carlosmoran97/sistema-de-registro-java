@@ -26,19 +26,31 @@ public class LineaDeVenta {
     private Producto producto;
     private int cantidad;
     private float precioUnitario;
+    private int id_venta;
 
     public LineaDeVenta()
     {
         
     }
     
-    public LineaDeVenta(int id, Producto producto, int cantidad, float precioUnitario)
+    public LineaDeVenta(int id, Producto producto, int cantidad, float precioUnitario, int id_venta)
     {
         setId(id);
         setProducto(producto);
         setCantidad(cantidad);
         setPrecioUnitario(precioUnitario);
+        setId_venta(id_venta);
     }
+
+    public int getId_venta() {
+        return id_venta;
+    }
+
+    public void setId_venta(int id_venta) {
+        this.id_venta = id_venta;
+    }
+    
+    
     
     public Producto getProducto() {
         return producto;

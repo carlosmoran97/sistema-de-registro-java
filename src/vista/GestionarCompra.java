@@ -95,7 +95,6 @@ public class GestionarCompra extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -617,17 +616,18 @@ public class GestionarCompra extends javax.swing.JFrame {
 
     private void txtNitFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNitFocusLost
         // TODO add your handling code here:
-        try {
-            Proveedor prov = proveedorBd.obtenerUnProveedor(txtNit.getText());
-            if (prov != null) {
-                txtNombre.setText(prov.getNombre());
-                compraActual.setProveedor(prov);
-            } else {
-                JOptionPane.showMessageDialog(this, "No se encontró ningún proveedor con el NIT especificado. Por favor revise que haya ingresado el correcto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al intentar obtener el proveedor.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+//        try {
+//            Proveedor prov = proveedorBd.obtenerUnProveedor(txtNit.getText());
+//            if (prov != null) {
+//                txtNombre.setText(prov.getNombre());
+//                compraActual.setProveedor(prov);
+//            } else {
+//                JOptionPane.showMessageDialog(this, "No se encontró ningún proveedor con el NIT especificado. Por favor revise que haya ingresado el correcto.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+//            }
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(this, "Error al intentar obtener el proveedor.", "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//  COMENTADO POR TENER UN COMPORTAMIENTO MOLESTO ALV
     }//GEN-LAST:event_txtNitFocusLost
 
     private void txtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCodigoFocusLost
@@ -693,6 +693,8 @@ public class GestionarCompra extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GestionarCompra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

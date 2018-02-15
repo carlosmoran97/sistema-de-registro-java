@@ -66,6 +66,11 @@ public class SistemaDeRegistro extends javax.swing.JFrame {
         });
 
         btnVentas.setText("Ventas");
+        btnVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentasActionPerformed(evt);
+            }
+        });
 
         btnKardex.setText("Kardex");
 
@@ -139,6 +144,15 @@ public class SistemaDeRegistro extends javax.swing.JFrame {
             gc.setVisible(true);
         }
     }//GEN-LAST:event_btnComprasActionPerformed
+
+    private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
+        // TODO add your handling code here:
+        if(GestionarVenta.getActiveWindows() == 0)
+        {
+            GestionarVenta gv = new GestionarVenta();
+            gv.setVisible(true);
+        }
+    }//GEN-LAST:event_btnVentasActionPerformed
 
     /**
      * @param args the command line arguments

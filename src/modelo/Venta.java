@@ -31,7 +31,7 @@ public class Venta extends Comprobante {
     {
         return finalizada;
     }
-    public void finalizarVenta()
+    public void setFinalizada( boolean finalizada)
     {
         finalizada = true;
     }

@@ -18,8 +18,8 @@ public class Conexion {
         try
         {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-//            conn = DriverManager.getConnection("jdbc:mysql://localhost/sistema_registro","root","honeywell8470p");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/sistema_registro","root","facela987");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/sistema_registro","root","honeywell8470p");
+//            conn = DriverManager.getConnection("jdbc:mysql://localhost/sistema_registro","root","facela987");
 //            conn = DriverManager.getConnection("jdbc:mysql://localhost/sistema_registro","root","");
         }
         catch(ClassNotFoundException|InstantiationException|IllegalAccessException|SQLException ex)
