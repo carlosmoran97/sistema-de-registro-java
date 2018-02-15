@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author carlos
  */
 public class ProductoTableModel extends AbstractTableModel{
-    private final int NUM_COLUMNS = 6;
+    public final int NUM_COLUMNS = 6;
     List<Producto> productos = new ArrayList<>();
 
     @Override

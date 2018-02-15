@@ -31,7 +31,7 @@ public class GestionarProductos extends javax.swing.JFrame {
     private void inicializarColumnas()
     {
         TableColumnModel tColumnModel = new DefaultTableColumnModel();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < productoTModel.NUM_COLUMNS; i++) {
             TableColumn col = new TableColumn(i);
             switch(i)
             {
@@ -224,9 +224,19 @@ public class GestionarProductos extends javax.swing.JFrame {
         );
 
         tablaProductos.setModel(productoTModel);
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablaProductos);
 
         btnEliminar.setText("Eliminar seleccionados");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnActualizar.setText("Actualizar tabla");
 
@@ -308,6 +318,23 @@ public class GestionarProductos extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+        // TODO add your handling code here:
+        int row = tablaProductos.rowAtPoint(evt.getPoint());
+        int clicks = evt.getClickCount();
+        if(clicks==2)
+        {
+            productoActual = productoTModel.productos.get(row);
+            txtCodigo.setText(productoActual.getCodigo());
+            txtDescripcion.setText(productoActual.getDescripcion());
+        }
+    }//GEN-LAST:event_tablaProductosMouseClicked
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments

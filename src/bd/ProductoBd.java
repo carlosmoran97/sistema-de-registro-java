@@ -87,4 +87,12 @@ public class ProductoBd {
         ps.setFloat(5, prod.getPrecioSugerido());
         ps.execute();
     }
+    public void eliminarProducto(int id) throws SQLException
+    {
+        String sql = "DELETE FROM producto WHERE id_producto = ?";
+        PreparedStatement ps = Conexion.getConnection().prepareStatement(sql);
+        ps.setInt(1, id);
+        
+        ps.executeUpdate();
+    }
 }

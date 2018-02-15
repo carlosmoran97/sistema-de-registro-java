@@ -219,10 +219,10 @@ public class GestionarProveedores extends javax.swing.JFrame {
         int [] aEliminar = TablaProveedores.getSelectedRows();
         try{
             for(Integer index: aEliminar){
-                proveedorBd.eliminarProveedor(proveedorTModel.proveedores.get(index).getId());
-                llenarTabla();
-                JOptionPane.showMessageDialog(this, "Registros eliminados correctamente");
+                proveedorBd.eliminarProveedor(proveedorTModel.proveedores.get(index).getId());               
             }
+            llenarTabla();
+            JOptionPane.showMessageDialog(this, "Registros eliminados correctamente");
         }
         catch(SQLException e){
             javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar: " + e.getMessage());
