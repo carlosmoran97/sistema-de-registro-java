@@ -17,10 +17,17 @@ import javax.swing.JOptionPane;
  * @author Carlos
  */
 public class GestionarProveedores extends javax.swing.JFrame {
+    private static int activeWindows;
     private ProveedorBd proveedorBd= new ProveedorBd();
     private ProveedorTableModel proveedorTModel = new ProveedorTableModel();
     private String modo = "guardar";
     private Proveedor proveedorAActualizar = null;
+    
+    public static int getActiveWindows() {
+        return activeWindows;
+    }
+
+    
     /**
      * Creates new form DemoSistema
      */
@@ -28,6 +35,7 @@ public class GestionarProveedores extends javax.swing.JFrame {
         initComponents();
         inicializarColumnas();
         llenarTabla();
+        activeWindows++;
     }
     private void inicializarColumnas(){
         TableColumnModel tColumnModel = new DefaultTableColumnModel();
@@ -80,7 +88,6 @@ public class GestionarProveedores extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestion de proveedores");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -334,13 +341,7 @@ public class GestionarProveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_TablaProveedoresMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-        try{
-            Conexion.getConnection().close();
-        }
-        catch(SQLException ex){
-            JOptionPane.showMessageDialog(this, "Ocurrió un error al cerrar la base de datos");
-        }
+        activeWindows--;
     }//GEN-LAST:event_formWindowClosing
 
     /**

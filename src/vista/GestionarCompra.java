@@ -34,7 +34,7 @@ public class GestionarCompra extends javax.swing.JFrame {
     private String data[][] = {};
     private String cabecera[] = {"Cantidad", "Concepto", "Precio unitario", "Total de línea"};
     private final int ENTER_CODE = 10;
-
+    private static int activeWindows;
     private Producto productoActual;
 
     /**
@@ -44,6 +44,7 @@ public class GestionarCompra extends javax.swing.JFrame {
         initComponents();
         lineasDeCompra = new DefaultTableModel(data, cabecera);
         tablaLineasDeCompra.setModel(lineasDeCompra);
+        activeWindows++;
     }
 
     /**
@@ -116,6 +117,11 @@ public class GestionarCompra extends javax.swing.JFrame {
         txtNit.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtNitFocusLost(evt);
+            }
+        });
+        txtNit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNitActionPerformed(evt);
             }
         });
         txtNit.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -411,7 +417,7 @@ public class GestionarCompra extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 997, Short.MAX_VALUE)
+            .addGap(0, 1049, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,6 +494,10 @@ public class GestionarCompra extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIniciarActionPerformed
 
+    public static int getActiveWindows() {
+        return activeWindows;
+    }
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         try {
@@ -498,11 +508,7 @@ public class GestionarCompra extends javax.swing.JFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } finally {
-            try {
-                Conexion.getConnection().close();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Error al cerrar la conexion.");
-            }
+            activeWindows--;
         }
     }//GEN-LAST:event_formWindowClosing
 
@@ -598,7 +604,7 @@ public class GestionarCompra extends javax.swing.JFrame {
                 };
                 lineasDeCompra.addRow(data);
                 tablaLineasDeCompra.repaint();
-                txtTotal.setText(String.format("$%0.2f", compraActual.total()));
+                txtTotal.setText(String.format("$ %.2f", compraActual.total()));
             } else {
                 JOptionPane.showMessageDialog(this, "Este producto ya ha sido agregado", "Advertencia!!", JOptionPane.WARNING_MESSAGE);
             }
@@ -642,6 +648,10 @@ public class GestionarCompra extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_txtCodigoFocusLost
+
+    private void txtNitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNitActionPerformed
     private void habilitarControlesDatosDeDocumento(boolean estado) {
         txtFecha.setEnabled(estado);
         txtNumeroDocumento.setEnabled(estado);

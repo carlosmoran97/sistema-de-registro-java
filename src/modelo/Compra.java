@@ -26,9 +26,6 @@ public class Compra extends Comprobante{
     {
         super(id, fecha, numeroDeDocumento);
         setProveedor(proveedor);
-        setId(id);
-        setFecha(fecha);
-        setNumeroDeDocumento(numeroDeDocumento);
         setFinalizada(false);
     }
 

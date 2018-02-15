@@ -6,24 +6,28 @@
 package modelo;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Date;
+import java.sql.Date;
 /**
  *
  * @author Carlos
  */
-public class Venta {
-    private Date fecha;
-    private int id;
+public class Venta extends Comprobante {
+    private Cliente cliente;
     private boolean finalizada;
-    private List<LineaDeVenta> lineasDeVenta = new ArrayList<LineaDeVenta>();
+    public List<LineaDeVenta> lineasDeVenta = new ArrayList<>();
     
     public Venta()
     {
         finalizada = false;
     }
     
-    public boolean getFinalizada()
+    public Venta(int id, Date fecha, String numeroDeDocumento, Cliente cliente)
+    {
+        super(id, fecha, numeroDeDocumento);
+        setCliente(cliente);
+    }
+    
+    public boolean isFinalizada()
     {
         return finalizada;
     }
@@ -31,58 +35,40 @@ public class Venta {
     {
         finalizada = true;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-    
-    public void agregarLineaDeVenta(Producto producto, int cantidad)
+   
+    public boolean validarLineaDeVenta(LineaDeVenta lineaDeVenta)
     {
-        LineaDeVenta ldv = new LineaDeVenta();
-        ldv.setProducto(producto);
-        ldv.setCantidad(cantidad);
-        lineasDeVenta.add(ldv);
-    }
-    
-    public float obtenerTotal()
-    {
-        Iterator iter = lineasDeVenta.iterator();
-        LineaDeVenta ldv = new LineaDeVenta();
-        float total = 0;
-        while(iter.hasNext())
+        boolean valida = true;
+        for (LineaDeVenta l:lineasDeVenta) {
+            if(l.getProducto().getId() == lineaDeVenta.getProducto().getId())
+            {
+                valida = false;
+                break;
+            }
+        }
+        if(valida)
         {
-            ldv = (LineaDeVenta)iter.next();
-            total += ldv.obtenerSubtotal();
+            lineasDeVenta.add(lineaDeVenta);
+        }
+        return valida;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
+    public float total()
+    {
+        float total = 0;
+        for(LineaDeVenta l: lineasDeVenta)
+        {
+            total += l.subtotal();
         }
         return total;
     }
     
-    @Override
-    public String toString()
-    {
-        String salida = new String();
-        Iterator iter = lineasDeVenta.iterator();
-        salida += "Fecha: " + fecha.toString() + "\n\n";
-        while(iter.hasNext())
-        {
-            LineaDeVenta ldv = (LineaDeVenta)iter.next();
-            salida += ldv.getCantidad() + "\t" + ldv.getProducto().getNombre() + "\n";
-        }
-        salida +="\n" + "Total: " +  String.format("$%.2f", obtenerTotal());
-        return salida;
-    }
 }

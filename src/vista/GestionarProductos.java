@@ -20,6 +20,7 @@ public class GestionarProductos extends javax.swing.JFrame {
     private ProductoTableModel productoTModel = new ProductoTableModel();
     private String modo = "guardar";
     private ProductoBd productoBd = new ProductoBd();
+    private static int activeWindows;
     /**
      * Creates new form GestionarProductos
      */
@@ -27,7 +28,13 @@ public class GestionarProductos extends javax.swing.JFrame {
         initComponents();
         inicializarColumnas();
         llenarTabla();
+        activeWindows++;
     }
+
+    public static int getActiveWindows() {
+        return activeWindows;
+    }
+    
     private void inicializarColumnas()
     {
         TableColumnModel tColumnModel = new DefaultTableColumnModel();
@@ -107,8 +114,12 @@ public class GestionarProductos extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestionar productos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -335,6 +346,11 @@ public class GestionarProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        activeWindows--;
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
  * @author Carlos
  */
 public class ProveedorBd {
-    public List<Proveedor> proveedores = new ArrayList<Proveedor>();
+    public List<Proveedor> proveedores = new ArrayList<>();
     public void obtenerProveedores()
     {
         proveedores.clear();
@@ -88,7 +88,7 @@ public class ProveedorBd {
         Proveedor prov = null;
             String sql = "SELECT * FROM proveedor WHERE nit = ?";
             PreparedStatement ps = Conexion.getConnection().prepareStatement(sql);
-            ps.setString(1, "%" + nit + "%");
+            ps.setString(1,nit );
             ResultSet rs = ps.executeQuery();
             
             while(rs.next())
