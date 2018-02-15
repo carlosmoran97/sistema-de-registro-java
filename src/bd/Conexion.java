@@ -22,7 +22,7 @@ public class Conexion {
         }
         catch(ClassNotFoundException|InstantiationException|IllegalAccessException|SQLException ex)
         {
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
         return;
     }

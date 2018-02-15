@@ -29,7 +29,7 @@ public class ProveedorBd {
             while(rs.next())
             {
                 p = new Proveedor();
-                p.setId(rs.getInt("Id_proveedor"));
+                p.setId(rs.getInt("id_proveedor"));
                 p.setNombre(rs.getString("nombre"));
                 p.setNit(rs.getString("nit"));
                 proveedores.add(p);
@@ -82,6 +82,23 @@ public class ProveedorBd {
                 proveedoresPorNit.add(prov);
             }
         return proveedoresPorNit;
+    }
+    public Proveedor obtenerUnProveedor(String nit) throws SQLException
+    {
+        Proveedor prov = null;
+            String sql = "SELECT * FROM proveedor WHERE nit = ?";
+            PreparedStatement ps = Conexion.getConnection().prepareStatement(sql);
+            ps.setString(1, "%" + nit + "%");
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                prov = new Proveedor();
+                prov.setId(rs.getInt("id_proveedor"));
+                prov.setNombre(rs.getString("nombre"));
+                prov.setNit(rs.getString("nit"));
+            }
+        return prov;
     }
     public void eliminarProveedor(int id) throws SQLException{
         String sql = "DELETE FROM proveedor WHERE id_proveedor = ?";

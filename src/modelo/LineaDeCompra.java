@@ -13,8 +13,23 @@ public class LineaDeCompra {
     private int id;
     private Producto producto;
     private int cantidad;
-    private int precioUnitario;
-
+    private float precioUnitario;
+    private int id_compra;
+    
+    public LineaDeCompra()
+    {
+        
+    }
+    
+    public LineaDeCompra(int id, Producto producto, int cantidad, float precioUnitario, int id_compra)
+    {
+        setId(id);
+        setProducto(producto);
+        setCantidad(cantidad);
+        setPrecioUnitario(precioUnitario);
+        setId_compra(id_compra);
+    }
+    
     public int getId() {
         return id;
     }
@@ -39,15 +54,24 @@ public class LineaDeCompra {
         this.cantidad = cantidad;
     }
 
-    public int getPrecioUnitario() {
+    public float getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(int precioUnitario) {
+    public void setPrecioUnitario(float precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
     public float subtotal()
     {
         return getCantidad() * getPrecioUnitario();
     }
+
+    public int getId_compra() {
+        return id_compra;
+    }
+
+    public void setId_compra(int id_compra) {
+        this.id_compra = id_compra;
+    }
+    
 }
